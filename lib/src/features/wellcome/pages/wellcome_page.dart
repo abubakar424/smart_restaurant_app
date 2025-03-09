@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/features/auth/pages/login_bottom_sheet.dart';
 
 import '../../../common/constants/app_images.dart';
 import '../../../common/constants/global_variables.dart';
 import '../../../common/widgets/custom_button.dart';
+import '../../auth/pages/login_bottom_sheet.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});

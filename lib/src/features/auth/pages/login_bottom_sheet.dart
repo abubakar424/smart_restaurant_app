@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restaurant_app/src/common/utils/validations.dart';
 
 import '../../../common/constants/app_images.dart';
 import '../../../common/constants/global_variables.dart';
+import '../../../common/utils/validations.dart';
 import '../../../common/widgets/custom_button.dart';
 import '../../../common/widgets/custom_text_field.dart';
 import '../../../router/routes.dart';

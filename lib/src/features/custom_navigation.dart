@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/dummy_data/user_profile_list.dart';
-import 'package:restaurant_app/src/features/new_order/pages/new_order_page.dart';
-import 'package:restaurant_app/src/features/promotions/pages/promotion_page.dart';
-import 'package:restaurant_app/src/features/product/pages/product_page.dart';
-import 'package:restaurant_app/src/features/profile/pages/profile_page.dart';
-import 'package:restaurant_app/src/features/update_screen/update_screen_home.dart';
+import 'package:smart_restaurant_app/src/features/product/pages/product_page.dart';
+import 'package:smart_restaurant_app/src/features/profile/pages/profile_page.dart';
+import 'package:smart_restaurant_app/src/features/promotions/pages/promotion_page.dart';
+import 'package:smart_restaurant_app/src/features/update_screen/update_screen_home.dart';
+
+import '../common/constants/app_images.dart';
+import '../dummy_data/user_profile_list.dart';
+import 'new_order/pages/new_order_page.dart';
+
 
 class CustomNavigation extends StatefulWidget {
   const CustomNavigation({super.key});

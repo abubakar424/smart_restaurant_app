@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/dummy_data/order_status_list.dart';
-import 'package:restaurant_app/src/features/product/model/product_model.dart';
+
+import '../../../dummy_data/order_status_list.dart';
+import '../model/product_model.dart';
 
 class ProductProvider extends ChangeNotifier {
   List<ProductModel> _products = [];

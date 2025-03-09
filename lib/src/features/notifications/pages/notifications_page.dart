@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../common/constants/global_variables.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});

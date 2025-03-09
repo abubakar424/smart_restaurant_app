@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/model/food_list/food_list_model.dart';
+
+import '../../../../model/food_list/food_list_model.dart';
 
 class FoodListProvider extends ChangeNotifier {
   List<FoodListModel> _products = [];

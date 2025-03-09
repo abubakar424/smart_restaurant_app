@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/widgets/custom_back_button.dart';
-import 'package:restaurant_app/src/model/order/customer_order_model.dart';
-import 'package:restaurant_app/src/model/order/customer_rider_model.dart';
 
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../common/widgets/custom_back_button.dart';
+import '../../../model/order/customer_order_model.dart';
+import '../../../model/order/customer_rider_model.dart';
 class OrderDetailPage extends StatelessWidget {
   final CustomerOrder order;
   final VoidCallback onAction; // Accept order or Mark as done action callback

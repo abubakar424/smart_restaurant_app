@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
-import 'package:restaurant_app/src/common/utils/custom_snackbar.dart';
-import 'package:restaurant_app/src/common/utils/image_picker_helper.dart';
-import 'package:restaurant_app/src/common/utils/validations.dart';
-import 'package:restaurant_app/src/common/widgets/custom_button.dart';
-import 'package:restaurant_app/src/common/widgets/custom_text_field.dart';
-import 'package:restaurant_app/src/features/product/model/product_model.dart';
-import 'package:restaurant_app/src/features/product/provider/product_provider.dart';
 
-class AddProductPage extends StatefulWidget {
+
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/global_variables.dart';
+import '../../../common/utils/custom_snackbar.dart';
+import '../../../common/utils/image_picker_helper.dart';
+import '../../../common/utils/validations.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../../../common/widgets/custom_text_field.dart';
+import '../model/product_model.dart';
+import '../provider/product_provider.dart';class AddProductPage extends StatefulWidget {
   const AddProductPage({super.key});
 
   @override

@@ -1,10 +1,18 @@
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
+<<<<<<< HEAD
 project(restaurant_app LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
 set(BINARY_NAME "restaurant_app")
+=======
+project(smart_restaurant_app LANGUAGES CXX)
+
+# The name of the executable created for the application. Change this to change
+# the on-disk name of your application.
+set(BINARY_NAME "smart_restaurant_app")
+>>>>>>> 9e5c1640dff311b2c39518da8d29b724b32f1f0a
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.

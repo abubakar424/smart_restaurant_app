@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
-import 'package:restaurant_app/src/features/food_list/pages/food_list_detail_page.dart';
-import 'package:restaurant_app/src/features/food_list/pages/provider/food_list_provider.dart';
-import 'package:restaurant_app/src/model/food_list/food_list_model.dart';
+import 'package:smart_restaurant_app/src/features/food_list/pages/provider/food_list_provider.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../common/constants/global_variables.dart';
+import '../../../model/food_list/food_list_model.dart';
+import 'food_list_detail_page.dart';
 
 class FoodListPage extends StatefulWidget {
   const FoodListPage({super.key});
@@ -85,7 +86,7 @@ class _FoodListPageState extends State<FoodListPage>
                 buildProductList(foodListProvider.products),
                 buildProductList(
                   foodListProvider.products
-                      .where((product) => product.foodList == 'Breakfast')
+                      .where((product) => product!.foodList == 'Breakfast')
                       .toList(),
                 ),
                 buildProductList(

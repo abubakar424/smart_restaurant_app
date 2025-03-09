@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/dummy_data/order_list.dart';
-import 'package:restaurant_app/src/features/new_order/widgets/custom_tab_list.dart';
-import 'package:restaurant_app/src/model/order/customer_rider_model.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../dummy_data/order_list.dart';
+import '../../../model/order/customer_rider_model.dart';
+import '../widgets/custom_tab_list.dart';
 
 class NewOrderPage extends StatefulWidget {
   const NewOrderPage({super.key});

@@ -1,5 +1,6 @@
 
-import 'package:restaurant_app/src/model/profile/reviews_model.dart';
+
+import '../model/profile/reviews_model.dart';
 
 List<Review> reviews = [
   Review(

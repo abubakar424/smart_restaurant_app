@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-
+import '../../../common/constants/app_images.dart';
 import '../../../common/constants/global_variables.dart';
 import '../../../common/widgets/custom_button.dart';
 

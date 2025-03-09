@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/widgets/custom_back_button.dart';
-import 'package:restaurant_app/src/features/profile/widgets/profile_info_card.dart';
-import 'package:restaurant_app/src/model/profile/user_profile_model.dart';
-import 'package:restaurant_app/src/router/routes.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../common/widgets/custom_back_button.dart';
+import '../../../model/profile/user_profile_model.dart';
+import '../../../router/routes.dart';
+import '../widgets/profile_info_card.dart';
+
 
 class PersonalInfoPage extends StatefulWidget {
   final UserProfile userProfile;

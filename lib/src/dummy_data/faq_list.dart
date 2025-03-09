@@ -1,6 +1,7 @@
 // faq_data.dart
-import 'package:restaurant_app/src/model/profile/faq_model.dart';
 
+
+import '../model/profile/faq_model.dart';
 
 class FAQData {
   static final List<FAQItem> faqItems = [

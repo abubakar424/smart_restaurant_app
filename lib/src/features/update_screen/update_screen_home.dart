@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
+import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_images.dart';
 class HomeUpdateScreen extends StatelessWidget {
   const HomeUpdateScreen({super.key});

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/widgets/custom_back_button.dart';
-import 'package:restaurant_app/src/dummy_data/reviews_list.dart';
-import 'package:restaurant_app/src/features/profile/widgets/custom_reviews_card.dart';
+
+import '../../../common/constants/app_images.dart';
+import '../../../common/widgets/custom_back_button.dart';
+import '../../../dummy_data/reviews_list.dart';
+import '../widgets/custom_reviews_card.dart';
+
 
 class ReviewsPage extends StatefulWidget {
   const ReviewsPage({

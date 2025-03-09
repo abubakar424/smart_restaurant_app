@@ -2,13 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/widgets/custom_back_button.dart';
-import 'package:restaurant_app/src/dummy_data/order_list.dart'; // Import the dummy orders data
-import 'package:restaurant_app/src/features/history/widgets/history_order_card.dart';
-import 'package:restaurant_app/src/model/order/customer_order_model.dart';
-import 'package:restaurant_app/src/model/order/customer_rider_model.dart';
-import 'package:restaurant_app/src/router/routes.dart'; // Import the model for completed orders
+
+import '../../../common/constants/app_images.dart';
+import '../../../common/widgets/custom_back_button.dart';
+import '../../../dummy_data/order_list.dart';
+import '../../../model/order/customer_order_model.dart';
+import '../../../model/order/customer_rider_model.dart';
+import '../../../router/routes.dart';
+import '../widgets/history_order_card.dart';
 
 List<CustomerOrder> completedOrders = dummyOrders
     .where((order) => order.status == OrderStatus.completed)

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
 
 class UserInfoCard extends StatelessWidget {
   final String fullName;

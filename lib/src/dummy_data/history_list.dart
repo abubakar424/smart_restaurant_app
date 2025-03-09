@@ -1,5 +1,6 @@
 // dummy_orders.dart
-import 'package:restaurant_app/src/model/history/history_model.dart';
+
+import '../model/history/history_model.dart';
 
 class DummyOrders {
   static List<OrderModel> ongoingOrders = [

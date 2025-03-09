@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/theme/color_scheme.dart';
-import 'package:restaurant_app/src/theme/widget_themes/app_text_theme.dart';
+import 'package:smart_restaurant_app/src/theme/widget_themes/app_text_theme.dart';
+
+import 'color_scheme.dart';
 
 class AppTheme {
   AppTheme._();

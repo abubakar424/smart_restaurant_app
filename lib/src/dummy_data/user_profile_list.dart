@@ -1,6 +1,7 @@
 // dummy_data.dart
 
-import 'package:restaurant_app/src/model/profile/user_profile_model.dart';
+
+import '../model/profile/user_profile_model.dart';
 
 List<UserProfile> dummyProfiles = [
   UserProfile(

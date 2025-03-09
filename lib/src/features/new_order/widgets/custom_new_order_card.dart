@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/model/order/customer_order_model.dart';
-import 'package:restaurant_app/src/model/order/customer_rider_model.dart';
-import 'package:restaurant_app/src/router/routes.dart';
+import '../../../common/constants/app_colors.dart';
+import '../../../model/order/customer_order_model.dart';
+import '../../../model/order/customer_rider_model.dart';
+import '../../../router/routes.dart';
 
 class OrderWidget extends StatelessWidget {
   final CustomerOrder order;

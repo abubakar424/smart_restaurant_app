@@ -1,5 +1,7 @@
-import 'package:restaurant_app/src/model/order/customer_rider_model.dart';
-import 'package:restaurant_app/src/model/order/order_item_model.dart';
+
+
+import 'customer_rider_model.dart';
+import 'order_item_model.dart';
 
 class CustomerOrder {
   final String id;

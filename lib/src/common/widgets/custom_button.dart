@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
+
+import '../constants/global_variables.dart';
 
 class CustomButton extends StatelessWidget {
   final Function()? onTap;

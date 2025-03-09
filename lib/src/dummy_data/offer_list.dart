@@ -1,5 +1,6 @@
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/model/offer_model.dart';
+
+import '../common/constants/app_images.dart';
+import '../model/offer_model.dart';
 
 final List<OfferCouponModel> offers = [
     OfferCouponModel(

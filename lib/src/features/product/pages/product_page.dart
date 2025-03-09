@@ -3,13 +3,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
-import 'package:restaurant_app/src/features/food_list/pages/food_list_detail_page.dart';
-import 'package:restaurant_app/src/features/product/model/product_model.dart';
-import 'package:restaurant_app/src/features/product/provider/product_provider.dart';
-import 'package:restaurant_app/src/router/routes.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../common/constants/global_variables.dart';
+import '../../../router/routes.dart';
+import '../../food_list/pages/food_list_detail_page.dart';
+import '../model/product_model.dart';
+import '../provider/product_provider.dart';
+
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -108,7 +110,7 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
                 children: [
                   buildProductList(
                     productProvider.products
-                        .where((product) => product.productCategory  == 'Foods')
+                        .where((product) => product?.productCategory  == 'Foods')
                         .toList(),
                   ),
                   buildProductList(

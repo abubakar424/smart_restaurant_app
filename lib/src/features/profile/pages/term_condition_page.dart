@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/widgets/custom_back_button.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../common/widgets/custom_back_button.dart';
+
 
 class TermsConditionsPage extends StatefulWidget {
   const TermsConditionsPage({super.key});

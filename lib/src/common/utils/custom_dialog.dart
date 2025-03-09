@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/router/routes.dart';
+
+import '../../router/routes.dart';
+import '../constants/app_colors.dart';
+import '../constants/app_images.dart';
 
 class CustomDialog {
   // Method to show the first dialog (Are you sure to log out?)

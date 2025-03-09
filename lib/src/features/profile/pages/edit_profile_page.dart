@@ -1,15 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
-import 'package:restaurant_app/src/common/utils/image_picker_helper.dart';
-import 'package:restaurant_app/src/common/utils/validations.dart';
-import 'package:restaurant_app/src/common/widgets/custom_back_button.dart';
-import 'package:restaurant_app/src/common/widgets/custom_button.dart';
-import 'package:restaurant_app/src/common/widgets/custom_text_field.dart';
-import 'package:restaurant_app/src/model/profile/user_profile_model.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../common/constants/global_variables.dart';
+import '../../../common/utils/image_picker_helper.dart';
+import '../../../common/utils/validations.dart';
+import '../../../common/widgets/custom_back_button.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../../../common/widgets/custom_text_field.dart';
+import '../../../model/profile/user_profile_model.dart';
+
 
 class EditProfilePage extends StatefulWidget {
   final UserProfile userProfile;

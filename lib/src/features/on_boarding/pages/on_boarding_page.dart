@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
-import 'package:restaurant_app/src/router/routes.dart';
+
+import '../../../common/constants/app_images.dart';
+import '../../../common/constants/global_variables.dart';
+import '../../../router/routes.dart';
 
 class OnboardingPageView extends StatefulWidget {
   const OnboardingPageView({super.key});

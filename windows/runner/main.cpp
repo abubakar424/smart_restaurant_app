@@ -27,7 +27,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   FlutterWindow window(project);
   Win32Window::Point origin(10, 10);
   Win32Window::Size size(1280, 720);
+<<<<<<< HEAD
   if (!window.Create(L"restaurant_app", origin, size)) {
+=======
+  if (!window.Create(L"smart_restaurant_app", origin, size)) {
+>>>>>>> 9e5c1640dff311b2c39518da8d29b724b32f1f0a
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);

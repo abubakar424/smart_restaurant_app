@@ -2,9 +2,9 @@
 
 // dummy_orders.dart
 
-import 'package:restaurant_app/src/model/order/customer_order_model.dart';
-import 'package:restaurant_app/src/model/order/customer_rider_model.dart';
-import 'package:restaurant_app/src/model/order/order_item_model.dart';
+import '../model/order/customer_order_model.dart';
+import '../model/order/customer_rider_model.dart';
+import '../model/order/order_item_model.dart';
 
 List<CustomerOrder> dummyOrders = [
   CustomerOrder(

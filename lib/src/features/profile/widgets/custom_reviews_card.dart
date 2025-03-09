@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/model/profile/reviews_model.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../model/profile/reviews_model.dart';
+
 
 class ReviewCard extends StatelessWidget {
   final Review review;

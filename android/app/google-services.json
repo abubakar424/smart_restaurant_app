@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "361572333927",
+    "project_id": "social-media-app-4960d",
+    "storage_bucket": "social-media-app-4960d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361572333927:android:2281e0e81f01f196e4d7c2",
+        "android_client_info": {
+          "package_name": "com.example.investorentrepreneur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "361572333927-9dqogj968dnd4a0fv27fqt3gtcj00vfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEikVvMmuvvmwhLbo0dVkh4tJXYOwAzXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "361572333927-9dqogj968dnd4a0fv27fqt3gtcj00vfp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "361572333927-1vo2imr5h911ckmv63tcv8f7v7hauso5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.investorentrepreneur"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361572333927:android:a70b39c0b70963fce4d7c2",
+        "android_client_info": {
+          "package_name": "com.example.smart_restaurant_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "361572333927-9dqogj968dnd4a0fv27fqt3gtcj00vfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEikVvMmuvvmwhLbo0dVkh4tJXYOwAzXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "361572333927-9dqogj968dnd4a0fv27fqt3gtcj00vfp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "361572333927-1vo2imr5h911ckmv63tcv8f7v7hauso5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.investorentrepreneur"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

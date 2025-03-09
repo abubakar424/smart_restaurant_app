@@ -1,4 +1,5 @@
-name: restaurant_app
+#name: restaurant_app
+name: smart_restaurant_app
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -19,8 +20,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-   sdk: ^3.5.1
 # sdk: ^3.5.2
+  sdk: ^3.5.4
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -57,6 +58,11 @@ dependencies:
   geocoding: ^2.0.4
   file_picker: ^9.0.2
 
+  firebase_storage: ^12.4.2
+  cloud_firestore: ^5.6.3
+  firebase_core: ^3.11.0
+  firebase_auth: ^5.4.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -83,6 +89,8 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+  # assets:
+  #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

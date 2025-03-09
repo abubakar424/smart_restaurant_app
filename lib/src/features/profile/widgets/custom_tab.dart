@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
+
+import '../../../common/constants/app_colors.dart';
 
 class UserReviewItem extends StatelessWidget {
   final String avatarImageUrl;

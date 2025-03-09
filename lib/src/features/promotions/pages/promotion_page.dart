@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
 
 class NewPromotionPage extends StatefulWidget {
   const NewPromotionPage({super.key});

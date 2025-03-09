@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
-import 'package:restaurant_app/src/common/widgets/custom_button.dart';
-import 'package:restaurant_app/src/common/widgets/custom_text_field.dart';
+
+import '../common/constants/global_variables.dart';
+import '../common/widgets/custom_button.dart';
+import '../common/widgets/custom_text_field.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

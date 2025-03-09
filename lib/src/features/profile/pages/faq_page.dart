@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/widgets/custom_back_button.dart';
-import 'package:restaurant_app/src/dummy_data/faq_list.dart';
-import 'package:restaurant_app/src/model/profile/faq_model.dart';
+
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../common/widgets/custom_back_button.dart';
+import '../../../dummy_data/faq_list.dart';
+import '../../../model/profile/faq_model.dart';
 
 class FAQPage extends StatefulWidget {
   const FAQPage({super.key});

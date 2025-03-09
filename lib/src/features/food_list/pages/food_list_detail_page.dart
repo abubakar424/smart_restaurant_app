@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
-import 'package:restaurant_app/src/common/utils/image_picker_helper.dart';
-import 'package:restaurant_app/src/features/food_list/pages/product_add_page.dart';
-import 'package:restaurant_app/src/features/product/provider/product_provider.dart';
+import 'package:smart_restaurant_app/src/features/food_list/pages/product_add_page.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../common/constants/global_variables.dart';
+import '../../../common/utils/image_picker_helper.dart';
+import '../../product/provider/product_provider.dart';
 
 class FoodListDetailPage extends StatefulWidget {
   final int productId; // Pass the product ID for tracking

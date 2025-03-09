@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
-import 'package:restaurant_app/src/model/order_status_model.dart';
+
+import '../../model/order_status_model.dart';
+import '../constants/app_colors.dart';
+import '../constants/global_variables.dart';
 
 class OrderStatusWidget extends StatelessWidget {
   final OrderStatusModel orderStatus;

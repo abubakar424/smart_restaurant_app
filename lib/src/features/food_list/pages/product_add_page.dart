@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/src/common/constants/global_variables.dart';
-import 'package:restaurant_app/src/features/food_list/pages/provider/food_list_provider.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/widgets/custom_button.dart';
-import 'package:restaurant_app/src/common/widgets/custom_text_field.dart';
-import 'package:restaurant_app/src/features/product/provider/product_provider.dart';
+import 'package:smart_restaurant_app/src/features/food_list/pages/provider/food_list_provider.dart';
 
+import '../../../common/constants/app_images.dart';
+import '../../../common/constants/global_variables.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../../../common/widgets/custom_text_field.dart';
+import '../../product/provider/product_provider.dart';
 class ProductAddPage extends StatefulWidget {
   final int productId;
   const ProductAddPage({super.key, required this.productId});

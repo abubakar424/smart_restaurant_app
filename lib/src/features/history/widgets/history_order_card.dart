@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/model/order/customer_order_model.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../model/order/customer_order_model.dart';
 
 class OrderCard extends StatelessWidget {
   final CustomerOrder order; // Updated to use CustomerOrder model

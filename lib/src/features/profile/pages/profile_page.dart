@@ -2,12 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restaurant_app/src/common/constants/app_colors.dart';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/common/utils/custom_dialog.dart';
-import 'package:restaurant_app/src/features/profile/widgets/custom_tab.dart';
-import 'package:restaurant_app/src/model/profile/user_profile_model.dart';
-import 'package:restaurant_app/src/router/routes.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_images.dart';
+import '../../../common/utils/custom_dialog.dart';
+import '../../../model/profile/user_profile_model.dart';
+import '../../../router/routes.dart';
+import '../widgets/custom_tab.dart';
+
 
 class ProfilePage extends StatelessWidget {
   final UserProfile userProfile;

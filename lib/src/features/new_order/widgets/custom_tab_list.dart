@@ -1,9 +1,10 @@
 // order_list_widget.dart
 
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/src/features/new_order/widgets/custom_new_order_card.dart';
-import 'package:restaurant_app/src/model/order/customer_order_model.dart';
-import 'package:restaurant_app/src/model/order/customer_rider_model.dart';
+
+import '../../../model/order/customer_order_model.dart';
+import '../../../model/order/customer_rider_model.dart';
+import 'custom_new_order_card.dart';
 
 class OrderListWidget extends StatelessWidget {
   final OrderStatus currentStatus;

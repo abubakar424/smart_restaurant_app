@@ -1,9 +1,9 @@
 import 'dart:math';
-import 'package:restaurant_app/src/common/constants/app_images.dart';
-import 'package:restaurant_app/src/features/product/model/product_model.dart';
-import 'package:restaurant_app/src/model/food_list/food_list_model.dart';
-import 'package:restaurant_app/src/model/home/home_page_model.dart';
-import 'package:restaurant_app/src/model/order_status_model.dart';
+import '../common/constants/app_images.dart';
+import '../features/product/model/product_model.dart';
+import '../model/food_list/food_list_model.dart';
+import '../model/home/home_page_model.dart';
+import '../model/order_status_model.dart';
 
 List<OrderStatusModel> orders = [
   OrderStatusModel(

@@ -15,7 +15,11 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+<<<<<<< HEAD
                BuildableName = "restaurant_app.app"
+=======
+               BuildableName = "smart_restaurant_app.app"
+>>>>>>> 9e5c1640dff311b2c39518da8d29b724b32f1f0a
                BlueprintName = "Runner"
                ReferencedContainer = "container:Runner.xcodeproj">
             </BuildableReference>
@@ -31,7 +35,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+<<<<<<< HEAD
             BuildableName = "restaurant_app.app"
+=======
+            BuildableName = "smart_restaurant_app.app"
+>>>>>>> 9e5c1640dff311b2c39518da8d29b724b32f1f0a
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -65,7 +73,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+<<<<<<< HEAD
             BuildableName = "restaurant_app.app"
+=======
+            BuildableName = "smart_restaurant_app.app"
+>>>>>>> 9e5c1640dff311b2c39518da8d29b724b32f1f0a
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -82,7 +94,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+<<<<<<< HEAD
             BuildableName = "restaurant_app.app"
+=======
+            BuildableName = "smart_restaurant_app.app"
+>>>>>>> 9e5c1640dff311b2c39518da8d29b724b32f1f0a
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
