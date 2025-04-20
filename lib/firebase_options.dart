@@ -23,10 +23,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -60,10 +57,20 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCEikVvMmuvvmwhLbo0dVkh4tJXYOwAzXE',
-    appId: '1:361572333927:android:a70b39c0b70963fce4d7c2',
-    messagingSenderId: '361572333927',
-    projectId: 'social-media-app-4960d',
-    storageBucket: 'social-media-app-4960d.firebasestorage.app',
+    apiKey: 'AIzaSyAN231NeTmt8uC9Uqt4AQOeF2baDihXR-w',
+    appId: '1:1039156347082:android:7c4910eddf79e0b175b433',
+    messagingSenderId: '1039156347082',
+    projectId: 'car-wash-64a7e',
+    storageBucket: 'car-wash-64a7e.appspot.com',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBiyri5zVfr1MH6I2592s3m6xy3jwh3_H4',
+    appId: '1:1039156347082:ios:7795f5fca7dfdb8975b433',
+    messagingSenderId: '1039156347082',
+    projectId: 'car-wash-64a7e',
+    storageBucket: 'car-wash-64a7e.appspot.com',
+    iosBundleId: 'com.example.restaurantApp',
+  );
+
 }
