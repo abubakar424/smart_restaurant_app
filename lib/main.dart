@@ -9,7 +9,7 @@ import 'package:smart_restaurant_app/src/theme/theme.dart';
 void main() {
   runApp(const MyApp());
 }
-
+//Abdul Razzaq
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
