@@ -5,8 +5,11 @@ import 'package:smart_restaurant_app/src/features/food_list/pages/provider/food_
 import 'package:smart_restaurant_app/src/features/product/provider/product_provider.dart';
 import 'package:smart_restaurant_app/src/router/routes.dart';
 import 'package:smart_restaurant_app/src/theme/theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp() ;
   runApp(const MyApp());
 }
 //Abdul Razzaq

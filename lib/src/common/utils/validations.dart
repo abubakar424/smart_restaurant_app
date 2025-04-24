@@ -15,6 +15,17 @@ class Validation {
     return null;
   }
 
+  static String? nameValidation(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Please enter your name';
+    }
+    if (!RegExp(r"^[a-zA-Z\s]+$").hasMatch(value.trim())) {
+      return 'Name can only contain letters and spaces';
+    }
+    return null;
+  }
+
+
   static String? passwordValidation(String? value) {
     if (value!.isEmpty) {
       return 'Please enter a password';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_restaurant_app/src/features/auth/pages/signup_bottom_sheet.dart';
 import 'package:smart_restaurant_app/src/router/route_transitions.dart';
 import '../dummy_data/user_profile_list.dart';
 import '../features/auth/pages/back_email_page.dart';
@@ -355,6 +356,7 @@ class AppRoute {
   // static const String personalInfoPage = 'personal-info-page';
   /// notifications
   static const String notificationsPage = 'notifications-page';
+ // static const String signup = 'signup-bottom-bar';
   static const String profilePage = 'profile-page';
   static const String editProfilePage = 'edit-profile-page';
   static const String settingPage = 'setting-page';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_restaurant_app/src/features/auth/pages/signup_bottom_sheet.dart';
 
 import '../../../common/constants/app_images.dart';
 import '../../../common/constants/global_variables.dart';
@@ -154,7 +155,32 @@ class LoginBottomSheet {
                           ),
                         ),
                       ),
-                  
+                      const SizedBox(height: 15),
+                      Center(
+                        child: ValueListenableBuilder(
+                          valueListenable: isColor,
+                          builder: (context, value, child) => GestureDetector(
+                            onTap: () {
+                              isColor.value = !isColor.value;
+                              SignUpBottomSheet.showSignupBottomSheet(context) ;
+                            },
+                            child: AbsorbPointer(
+                              // Prevent interaction with the button when disabled, but still detect taps
+                              absorbing:
+                              value, // absorb pointer when button is disabled
+                              child: CustomButton(
+                                isDisabled:
+                                value, // The button will be disabled based on this value
+                                onTap: () {
+                                  // Toggle the button's state only when not disabled
+                                  isColor.value = !isColor.value;
+                                },
+                                text: 'SignUp',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 15),
                       Center(
                         child: CustomButton(

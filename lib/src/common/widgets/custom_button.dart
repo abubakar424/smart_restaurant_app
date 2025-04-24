@@ -49,7 +49,7 @@ class CustomButton extends StatelessWidget {
     this.borderColor,
     this.borderWidth,
     this.isDisabled =
-        false, // Initialize isDisabled with a default value of false
+        false,  bool? isLoading, // Initialize isDisabled with a default value of false
   });
 
   @override
