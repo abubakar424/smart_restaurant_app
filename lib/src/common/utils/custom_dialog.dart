@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_restaurant_app/src/features/auth/pages/login_bottom_sheet.dart';
 
 import '../../router/routes.dart';
 import '../constants/app_colors.dart';
@@ -117,7 +119,7 @@ class CustomDialog {
                                   color: AppColors.blackColor,
                                   letterSpacing: 0),
                           textAlign:
-                              TextAlign.center, // Center text horizontally
+                              TextAlign.center,
                         ),
                         const SizedBox(
                           height: 4,
@@ -143,8 +145,12 @@ class CustomDialog {
                 _CustomButton(
                   text: "Back to Login",
                   fillColor: AppColors.blue,
-                  onPressed: () {
-                    context.pushNamed(AppRoute.welcomePage); // Close the dialog
+                  onPressed: () async{
+                    final _auth = FirebaseAuth.instance;
+                    await _auth.signOut();
+                    if (context.mounted) {
+                      context.goNamed(AppRoute.welcomePage);
+                    }
                   },
                 ),
               ],

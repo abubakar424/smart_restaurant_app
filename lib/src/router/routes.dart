@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_restaurant_app/src/features/auth/pages/signup_bottom_sheet.dart';
+import 'package:smart_restaurant_app/src/features/product/pages/add_product.dart';
 import 'package:smart_restaurant_app/src/router/route_transitions.dart';
 import '../dummy_data/user_profile_list.dart';
 import '../features/auth/pages/back_email_page.dart';
@@ -251,15 +252,15 @@ class MyAppRouter {
         ),
       ),
 
-      // GoRoute(
-      //   name: AppRoute.addProductPage,
-      //   path: '/${AppRoute.addProductPage}',
-      //   pageBuilder: (context, state) => buildPageWithFadeTransition<void>(
-      //     context: context,
-      //     state: state,
-      //     child: const AddProductPage(),
-      //   ),
-      // ),
+      GoRoute(
+        name: AppRoute.addProductPage,
+        path: '/${AppRoute.addProductPage}',
+        pageBuilder: (context, state) => buildPageWithFadeTransition<void>(
+          context: context,
+          state: state,
+          child: const AddProductPage(),
+        ),
+      ),
       GoRoute(
         name: AppRoute.newPromotionPage,
         path: '/${AppRoute.newPromotionPage}',

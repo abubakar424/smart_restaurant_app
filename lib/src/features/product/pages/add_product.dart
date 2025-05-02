@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
-
-
 import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/global_variables.dart';
 import '../../../common/utils/custom_snackbar.dart';
@@ -14,14 +11,16 @@ import '../../../common/utils/validations.dart';
 import '../../../common/widgets/custom_button.dart';
 import '../../../common/widgets/custom_text_field.dart';
 import '../model/product_model.dart';
-import '../provider/product_provider.dart';class AddProductPage extends StatefulWidget {
+import '../provider/product_provider.dart';
+
+class AddProductPage extends StatefulWidget {
   const AddProductPage({super.key});
 
   @override
-  State<AddProductPage> createState() => _AddRecipeScreenState();
+  State<AddProductPage> createState() => _AddProductPageState();
 }
 
-class _AddRecipeScreenState extends State<AddProductPage> {
+class _AddProductPageState extends State<AddProductPage> {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController productName = TextEditingController();
   TextEditingController productPrice = TextEditingController();
@@ -30,14 +29,11 @@ class _AddRecipeScreenState extends State<AddProductPage> {
 
   String? selectImage;
   String? selectCategory;
-  List<String> category = ['Foods','Drinks'];
-
-  // Method to show image source selection and pick images
+  List<String> category = ['Foods', 'Drinks'];
 
   @override
   Widget build(BuildContext context) {
-    final foodListProvider =
-        Provider.of<ProductProvider>(context, listen: false);
+    final productProvider = Provider.of<ProductProvider>(context, listen: false);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -47,7 +43,6 @@ class _AddRecipeScreenState extends State<AddProductPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Container(
                   decoration: BoxDecoration(
                     color: colorScheme(context).onPrimary,
@@ -86,8 +81,8 @@ class _AddRecipeScreenState extends State<AddProductPage> {
                             ImagePickerHelper.showImageSourceSelection(
                               context,
                               onTapCamera: () async {
-                                final XFile? image = await ImagePickerHelper
-                                    .pickImageFromCamera();
+                                final XFile? image =
+                                await ImagePickerHelper.pickImageFromCamera();
                                 if (image != null) {
                                   setState(() {
                                     selectImage = image.path;
@@ -95,13 +90,12 @@ class _AddRecipeScreenState extends State<AddProductPage> {
                                 }
                               },
                               onTapGallery: () async {
-                                final XFile? image = await ImagePickerHelper
-                                    .pickImageFromGallery();
+                                final XFile? image =
+                                await ImagePickerHelper.pickImageFromGallery();
                                 if (image != null) {
                                   setState(() {
                                     selectImage = image.path;
                                   });
-                                  // foodListProvider.updateProductImage(widget.productId, image.path);
                                 }
                               },
                             );
@@ -114,19 +108,19 @@ class _AddRecipeScreenState extends State<AddProductPage> {
                               decoration: BoxDecoration(
                                 border: Border.all(color: AppColors.blackColor),
                                 borderRadius:
-                                    const BorderRadius.all(Radius.circular(6)),
+                                const BorderRadius.all(Radius.circular(6)),
                                 color: colorScheme(context).surface,
                               ),
                               child: selectImage == null
                                   ? Icon(
-                                      Icons.add_box_outlined,
-                                      color: colorScheme(context).outline,
-                                      size: 18,
-                                    )
+                                Icons.add_box_outlined,
+                                color: colorScheme(context).outline,
+                                size: 18,
+                              )
                                   : Image.file(
-                                      File(selectImage!),
-                                      fit: BoxFit.cover,
-                                    ),
+                                File(selectImage!),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -163,7 +157,6 @@ class _AddRecipeScreenState extends State<AddProductPage> {
                         fillColor: colorScheme(context).surface,
                         validator: (value) =>
                             Validation.fieldValidation(value, "product price"),
-                        // validationType: ValidationType.name,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
@@ -176,37 +169,41 @@ class _AddRecipeScreenState extends State<AddProductPage> {
                         decoration: BoxDecoration(
                           color: colorScheme(context).onPrimary,
                           borderRadius: BorderRadius.circular(8),
-                          border: Border(bottom: BorderSide(color: AppColors.blackColor)),
+                          border:
+                          Border(bottom: BorderSide(color: AppColors.blackColor)),
                         ),
                         width: double.infinity,
-
                         child: DropdownButtonFormField(
                           isExpanded: true,
-                            padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 3),
-                            decoration: const InputDecoration(border: InputBorder.none),
-                            hint: Text(
-                              'Select category',
-                              style: textTheme(context).labelLarge!.copyWith(
-                                  letterSpacing: 0,
-                                fontSize: 13,
-                                color: colorScheme(context).outline
-                              ),
-                            ),
-                            onChanged: (value){
-                              setState(() {
-                                selectCategory = value;
-                              });
-                            },
-                          items: category.map((String value) {
-                              return DropdownMenuItem(
-                                value: value,
-                                  child: Text(value,style: textTheme(context).labelLarge!.copyWith(
+                          padding:
+                          const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          decoration: const InputDecoration(border: InputBorder.none),
+                          hint: Text(
+                            'Select category',
+                            style: textTheme(context).labelLarge!.copyWith(
                                 letterSpacing: 0,
-                                color: AppColors.blackColor,)
-                              ));
-                        }).toList(),
-                          validator: (newValue){
-                            if(newValue == null){
+                                fontSize: 13,
+                                color: colorScheme(context).outline),
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              selectCategory = value;
+                            });
+                          },
+                          items: category.map((String value) {
+                            return DropdownMenuItem(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: textTheme(context).labelLarge!.copyWith(
+                                  letterSpacing: 0,
+                                  color: AppColors.blackColor,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          validator: (newValue) {
+                            if (newValue == null) {
                               return 'Please select a value';
                             }
                             return null;
@@ -216,7 +213,7 @@ class _AddRecipeScreenState extends State<AddProductPage> {
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: Text(
-                          "Product Descr",
+                          "Product Description",
                           style: textTheme(context).titleSmall,
                         ),
                       ),
@@ -224,22 +221,23 @@ class _AddRecipeScreenState extends State<AddProductPage> {
                         enableBorder: false,
                         controller: productDescr,
                         hint:
-                            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
                         fillColor: colorScheme(context).surface,
                         validator: (value) =>
-                            Validation.fieldValidation(value, "descr steps"),
-                        // validationType: ValidationType.name,
+                            Validation.fieldValidation(value, "description"),
                         maxline: 5,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: Center(
                           child: CustomButton(
-                              onTap: () {
-                                formKey.currentState!.validate();
-                                if (selectImage != null) {
-                                  final int newProductId = foodListProvider.getNextProductId();
-                                  // Create the new product
+                            onTap: () async {
+                              if (formKey.currentState!.validate() &&
+                                  selectImage != null &&
+                                  selectCategory != null) {
+                                try {
+                                  final int newProductId =
+                                  productProvider.getNextProductId();
                                   final product = ProductModel(
                                     productId: newProductId,
                                     productName: productName.text,
@@ -249,19 +247,32 @@ class _AddRecipeScreenState extends State<AddProductPage> {
                                     productCategory: selectCategory!,
                                   );
 
-                                  // Add the product to the list
-                                  foodListProvider.addProduct(product);
+                                  // Add product to Firebase
+                                  await productProvider.addProduct(
+                                      product, File(selectImage!));
 
-                                  // Go back or show success message
-                                  context.pop();
-                                } else {
+                                  // Show success message and go back
                                   showSnackbar(
-                                    message: "Please fill in all fields and upload an image",
+                                    message: "Product added successfully",
+                                    isError: false,
+                                  );
+                                  context.pop();
+                                } catch (e) {
+                                  showSnackbar(
+                                    message: "Failed to add product: $e",
                                     isError: true,
                                   );
                                 }
-                              },
-                              text: 'Upload'),
+                              } else {
+                                showSnackbar(
+                                  message:
+                                  "Please fill in all fields and upload an image",
+                                  isError: true,
+                                );
+                              }
+                            },
+                            text: 'Upload',
+                          ),
                         ),
                       ),
                     ],
