@@ -23,7 +23,9 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back),
+        leading: IconButton(icon: const Icon(Icons.arrow_back),onPressed: (){
+          context.pop();
+        },),
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -180,6 +180,20 @@ class SignUpBottomSheet {
                         ),
                       ),
                       const SizedBox(height: 15),
+                      Center(
+                        child: ValueListenableBuilder(
+                          valueListenable: isLoading,
+                          builder: (context, value, child) => CustomButton(
+                            isDisabled: value,
+                            isLoading: value, // Add isLoading to CustomButton
+                            onTap: () {
+                              context.pop();
+                            },
+                            text: 'Already have an account', // Change to 'Sign Up'
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 15),
                       // Google Sign-In Button
                       Center(
                         child: CustomButton(

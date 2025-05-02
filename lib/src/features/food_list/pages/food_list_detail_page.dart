@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_restaurant_app/src/features/food_list/pages/product_add_page.dart';
-
 import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_images.dart';
 import '../../../common/constants/global_variables.dart';
+import '../../../common/utils/custom_snackbar.dart';
 import '../../../common/utils/image_picker_helper.dart';
+import '../../product/model/product_model.dart';
 import '../../product/provider/product_provider.dart';
+import 'product_add_page.dart';
 
 class FoodListDetailPage extends StatefulWidget {
   final int productId; // Pass the product ID for tracking
@@ -28,9 +29,21 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
   @override
   Widget build(BuildContext context) {
     // Get the product from the provider using the ID
-    final foodListProvider = Provider.of<ProductProvider>(context, listen: false);
-    // final product = foodListProvider.getProductById(widget.productId);
-    final product = foodListProvider.getProductById(widget.productId);
+    final productProvider = Provider.of<ProductProvider>(context, listen: false);
+    final ProductModel product;
+    try {
+      product = productProvider.getProductById(widget.productId);
+    } catch (e) {
+      // Handle case where product is not found
+      return Scaffold(
+        body: Center(
+          child: Text(
+            "Product not found",
+            style: textTheme(context).titleLarge,
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -42,6 +55,7 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                   AppImages.bgImage,
                   color: Colors.black,
                   fit: BoxFit.cover,
+                  height: 200, // Adjusted for better layout
                 ),
                 Positioned(
                   top: 60,
@@ -50,19 +64,23 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                     onTap: () {
                       context.pop();
                     },
-                    child: const Icon(Icons.arrow_back),
+                    child: const Icon(Icons.arrow_back, color: Colors.white),
                   ),
                 ),
-
                 Positioned(
                   top: 100,
                   left: 0,
                   right: 0,
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height * .42,
+                    height: MediaQuery.of(context).size.height * 0.42,
                     width: double.infinity,
-                    child: selectImage == null
-                        ? (product.productImage.startsWith('http') // Agar network URL hai
+                    child: selectImage != null
+                        ? Image.file(
+                      File(selectImage!),
+                      fit: BoxFit.cover,
+                    )
+                        : (product.productImage.isNotEmpty &&
+                        product.productImage.startsWith('http')
                         ? CachedNetworkImage(
                       imageUrl: product.productImage,
                       fit: BoxFit.cover,
@@ -78,14 +96,10 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                         ),
                       ),
                     )
-                        : Image.file(
-                      File(product.productImage), // Agar local file hai (camera/gallery)
+                        : Image.asset(
+                      product.productImage,
                       fit: BoxFit.cover,
-                    ))
-                        : Image.file(
-                      File(selectImage!), // Camera/gallery se select ki hui image
-                      fit: BoxFit.cover,
-                    ),
+                    )),
                   ),
                 ),
                 Positioned(
@@ -99,21 +113,55 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                         ImagePickerHelper.showImageSourceSelection(
                           context,
                           onTapCamera: () async {
-                            final XFile? image = await ImagePickerHelper.pickImageFromCamera();
+                            final XFile? image =
+                            await ImagePickerHelper.pickImageFromCamera();
                             if (image != null) {
-                              setState(() {
-                                selectImage = image.path;
-                              });
-                              foodListProvider.updateProductImage(widget.productId, image.path);
+                              try {
+                                setState(() {
+                                  selectImage = image.path;
+                                });
+                                // Update image in Firebase
+                                await productProvider.updateProductImage(
+                                    widget.productId, File(image.path));
+                                showSnackbar(
+                                  message: "Image updated successfully",
+                                  isError: false,
+                                );
+                              } catch (e) {
+                                showSnackbar(
+                                  message: "Failed to update image: $e",
+                                  isError: true,
+                                );
+                                setState(() {
+                                  selectImage = null; // Reset on error
+                                });
+                              }
                             }
                           },
                           onTapGallery: () async {
-                            final XFile? image = await ImagePickerHelper.pickImageFromGallery();
+                            final XFile? image =
+                            await ImagePickerHelper.pickImageFromGallery();
                             if (image != null) {
-                              setState(() {
-                                selectImage = image.path;
-                              });
-                              foodListProvider.updateProductImage(widget.productId, image.path);
+                              try {
+                                setState(() {
+                                  selectImage = image.path;
+                                });
+                                // Update image in Firebase
+                                await productProvider.updateProductImage(
+                                    widget.productId, File(image.path));
+                                showSnackbar(
+                                  message: "Image updated successfully",
+                                  isError: false,
+                                );
+                              } catch (e) {
+                                showSnackbar(
+                                  message: "Failed to update image: $e",
+                                  isError: true,
+                                );
+                                setState(() {
+                                  selectImage = null; // Reset on error
+                                });
+                              }
                             }
                           },
                         );
@@ -124,11 +172,10 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                       ),
                     ),
                   ),
-
                 ),
                 Container(
                   padding: const EdgeInsets.all(20),
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * .48),
+                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.48),
                   decoration: BoxDecoration(
                     color: colorScheme(context).onPrimary,
                     borderRadius: const BorderRadius.only(
@@ -144,9 +191,8 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                             vertical: 10, horizontal: 120),
                         height: 10,
                         decoration: BoxDecoration(
-                          color: Colors.black, // Divider ka rang
-                          borderRadius: BorderRadius.circular(
-                              100),
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(100),
                         ),
                       ),
                       Row(
@@ -155,19 +201,18 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                             width: 100,
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             decoration: BoxDecoration(
-                                color:
-                                colorScheme(context).secondaryContainer,
-                                borderRadius: BorderRadius.circular(10)),
+                              color: colorScheme(context).secondaryContainer,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             child: Center(
                               child: Text(
                                 product.productCategory,
-                                style: textTheme(context)
-                                    .labelLarge!
-                                    .copyWith(
-                                    color: colorScheme(context)
-                                        .secondary
-                                        .withOpacity(0.4),
-                                    letterSpacing: 0),
+                                style: textTheme(context).labelLarge!.copyWith(
+                                  color: colorScheme(context)
+                                      .secondary
+                                      .withOpacity(0.4),
+                                  letterSpacing: 0,
+                                ),
                               ),
                             ),
                           ),
@@ -177,23 +222,18 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                             backgroundColor:
                             colorScheme(context).primary.withOpacity(0.1),
                             child: InkWell(
-                              onTap: () async {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ProductAddPage(
-                                  productId: product.productId,
-
-                                ),));
-                                // final updatedData = await Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => ProductAddPage(
-                                //       // productId: widget.productId,
-                                //     ),
-                                //   ),
-                                // );
-
-                                // if (updatedData != null) {
-                                //   setState(() {});
-                                // }
+                              onTap: () {
+                                // Navigate to ProductAddPage for editing
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductAddPage(
+                                      productId: product.productId,
+                                      isEditMode: true, // Indicate edit mode
+                                      existingProduct: product, // Pass existing product
+                                    ),
+                                  ),
+                                );
                               },
                               child: Icon(
                                 Icons.border_color_outlined,
@@ -201,13 +241,22 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
+                          const SizedBox(width: 5),
                           InkWell(
-                            onTap: () {
-                              foodListProvider.removeProduct(widget.productId); // Pass the correct productId
-                              Navigator.pop(context); // Optionally close the detail page after deletion
+                            onTap: () async {
+                              try {
+                                await productProvider.removeProduct(widget.productId);
+                                showSnackbar(
+                                  message: "Product deleted successfully",
+                                  isError: false,
+                                );
+                                context.pop(); // Close the detail page after deletion
+                              } catch (e) {
+                                showSnackbar(
+                                  message: "Failed to delete product: $e",
+                                  isError: true,
+                                );
+                              }
                             },
                             child: CircleAvatar(
                               radius: 20,
@@ -220,7 +269,7 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 15,),
+                      const SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -233,13 +282,12 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                               ),
                             ),
                           ),
-
                           Text(
                             "Rs ${product.productPrice}",
                             style: textTheme(context).titleLarge!.copyWith(
-                                letterSpacing: 0,
-                                fontWeight: FontWeight.bold,
-                                color: colorScheme(context).primary
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.bold,
+                              color: colorScheme(context).primary,
                             ),
                           ),
                         ],
@@ -251,7 +299,6 @@ class _FoodListDetailPageState extends State<FoodListDetailPage> {
                 ),
               ],
             ),
-
           ],
         ),
       ),

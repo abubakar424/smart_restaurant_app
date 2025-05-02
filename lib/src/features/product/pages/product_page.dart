@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
+import 'package:smart_restaurant_app/src/common/utils/custom_snackbar.dart';
 import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_images.dart';
 import '../../../common/constants/global_variables.dart';
@@ -11,7 +11,6 @@ import '../../../router/routes.dart';
 import '../../food_list/pages/food_list_detail_page.dart';
 import '../model/product_model.dart';
 import '../provider/product_provider.dart';
-
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -21,14 +20,16 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> with SingleTickerProviderStateMixin {
-
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-
+    // Fetch products when the page is initialized
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ProductProvider>(context, listen: false).fetchProducts();
+    });
   }
 
   @override
@@ -44,10 +45,11 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: colorScheme(context).primary,
-          child: Icon(Icons.add,color: colorScheme(context).onPrimary,),
-          onPressed: (){
+        child: Icon(Icons.add, color: colorScheme(context).onPrimary),
+        onPressed: () {
           context.pushNamed(AppRoute.addProductPage);
-      }),
+        },
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -82,10 +84,7 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          // TabBar design inside the Stack
+                          const SizedBox(height: 8),
                           TabBar(
                             dividerColor: Colors.transparent,
                             labelColor: colorScheme(context).primary,
@@ -110,7 +109,7 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
                 children: [
                   buildProductList(
                     productProvider.products
-                        .where((product) => product?.productCategory  == 'Foods')
+                        .where((product) => product.productCategory == 'Foods')
                         .toList(),
                   ),
                   buildProductList(
@@ -131,7 +130,11 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
       ),
     );
   }
+
   Widget buildProductList(List<ProductModel> products) {
+    if (products.isEmpty) {
+      return const Center(child: Text("No products available"));
+    }
     return ListView.builder(
       itemCount: products.length,
       itemBuilder: (context, index) {
@@ -156,8 +159,7 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
     required String productDescr,
     required String productCategory,
   }) {
-    // final size = MediaQuery.of(context).size;
-    final productProvider = Provider.of<ProductProvider>(context, listen: true);
+    final productProvider = Provider.of<ProductProvider>(context, listen: false);
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -193,21 +195,17 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
                 fit: BoxFit.cover,
                 height: 100,
                 width: 100,
-                placeholder: (context, url) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: colorScheme(context).primary,
-                    ),
-                  );
-                },
-                errorWidget: (context, url, error) {
-                  return Center(
-                    child: Icon(
-                      Icons.error,
-                      color: colorScheme(context).onError,
-                    ),
-                  );
-                },
+                placeholder: (context, url) => Center(
+                  child: CircularProgressIndicator(
+                    color: colorScheme(context).primary,
+                  ),
+                ),
+                errorWidget: (context, url, error) => Center(
+                  child: Icon(
+                    Icons.error,
+                    color: colorScheme(context).onError,
+                  ),
+                ),
               )
                   : Image.file(
                 File(productImage),
@@ -234,48 +232,53 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
                         ),
                       ),
                       PopupMenuButton<int>(
-                        onSelected: (value) {
-                          if (value == 1) {
-                            if (_tabController.index == 2) {
-                              productProvider.restoreProductCategory(productId); // Restore to original category
-                            } else {
-                              productProvider.moveToStack(productId); // Move to Stock
+                        onSelected: (value) async {
+                          try {
+                            if (value == 1) {
+                              if (_tabController.index == 2) {
+                                await productProvider
+                                    .restoreProductCategory(productId);
+                              } else {
+                                await productProvider.moveToStack(productId);
+                              }
+                            } else if (value == 2) {
+                              await productProvider.removeProduct(productId);
                             }
-                          }
-                          if (value == 2) {
-                            productProvider.removeProduct(productId); // Remove product
+                          } catch (e) {
+                            showSnackbar(
+                              message: "Operation failed: $e",
+                              isError: true,
+                            );
                           }
                         },
-                        itemBuilder: (context) {
-                          return [
-                            PopupMenuItem<int>(
-                              value: 1,
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.edit, color: Colors.blue),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    _tabController.index == 2 ? "Restock" : "OutStock", // Dynamic text based on tab
-                                    style: const TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
+                        itemBuilder: (context) => [
+                          PopupMenuItem<int>(
+                            value: 1,
+                            child: Row(
+                              children: [
+                                const Icon(Icons.edit, color: Colors.blue),
+                                const SizedBox(width: 10),
+                                Text(
+                                  _tabController.index == 2 ? "Restock" : "OutStock",
+                                  style: const TextStyle(color: Colors.black),
+                                ),
+                              ],
                             ),
-                            const PopupMenuItem<int>(
-                              value: 2,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.delete, color: Colors.red),
-                                  SizedBox(width: 10),
-                                  Text("Delete", style: TextStyle(color: Colors.black)),
-                                ],
-                              ),
+                          ),
+                          const PopupMenuItem<int>(
+                            value: 2,
+                            child: Row(
+                              children: [
+                                Icon(Icons.delete, color: Colors.red),
+                                SizedBox(width: 10),
+                                Text("Delete",
+                                    style: TextStyle(color: Colors.black)),
+                              ],
                             ),
-                          ];
-                        },
+                          ),
+                        ],
                         child: const Icon(Icons.more_vert),
-                      )
-
+                      ),
                     ],
                   ),
                   const SizedBox(height: 4),
@@ -288,7 +291,11 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text(productDescr,maxLines: 2,overflow: TextOverflow.ellipsis,),
+                  Text(
+                    productDescr,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),
