@@ -1,1 +1,35 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"car-wash-64a7e","appId":"1:1039156347082:android:7c4910eddf79e0b175b433","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"car-wash-64a7e","configurations":{"android":"1:1039156347082:android:7c4910eddf79e0b175b433","ios":"1:1039156347082:ios:7795f5fca7dfdb8975b433"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "car-wash-64a7e",
+          "appId": "1:1039156347082:android:7c4910eddf79e0b175b433",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "car-wash-64a7e",
+          "configurations": {
+            "android": "1:1039156347082:android:7c4910eddf79e0b175b433",
+            "ios": "1:1039156347082:ios:7795f5fca7dfdb8975b433"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ]
+}

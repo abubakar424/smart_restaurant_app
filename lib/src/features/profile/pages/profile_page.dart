@@ -1,8 +1,11 @@
-// ignore_for_file: unused_local_variable
-
+import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:image_picker/image_picker.dart';
 import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_images.dart';
 import '../../../common/utils/custom_dialog.dart';
@@ -11,14 +14,161 @@ import '../../../router/routes.dart';
 import '../widgets/custom_tab.dart';
 
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final UserProfile userProfile;
-  const ProfilePage({super.key, required this.userProfile});
+  ProfilePage({super.key, required this.userProfile});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String? _profileImageUrl;
+  String? name;
+  String? email;
+  bool _isLoading = true;
+
+  File? _image;
+  ImagePicker _picker = ImagePicker();
+  bool _isUploading = false;
+
+  Future<void> _fetchProfileImage() async {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        final doc = await _firestore.collection('userDetail').doc(user.uid).get();
+        if (doc.exists && doc.data() != null) {
+          setState(() {
+            _profileImageUrl = doc.data()!['profileImage'] as String?;
+          });
+        }
+      }
+    } catch (e) {
+      print('Error fetching profile image: $e');
+    }
+  }
+
+  void _fetchUserDetails() async {
+    try {
+      setState(() { _isLoading = true; });
+
+      final user = _auth.currentUser;
+      if(user != null) {
+        final doc = await _firestore.collection('userDetail').doc(user.uid).get();
+
+        if(doc.exists) {
+          setState(() {
+            name = doc['name'] ?? 'No Name';
+            email = doc['email'] ?? 'No Email';
+            _profileImageUrl = doc['profileImage'];
+            _isLoading = false;
+          });
+        }
+      }
+    } catch(e) {
+      setState(() { _isLoading = false; });
+      print('Error: $e');
+    }
+  }
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _fetchUserDetails();
+      _fetchProfileImage();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
+    Future<void> _uploadImage(File imageFile) async{
+      try{
+        final user = _auth.currentUser;
+        if(user == null) return ;
+        setState(() {
+          _isUploading = true;
+        });
+        showDialog(context: context, builder: (context){
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+        final Reference ref = _storage.ref().child("user_image/${user.uid}");
+        await ref.putFile(imageFile);
+
+        final String downloadUrl = await ref.getDownloadURL();
+        await _firestore.collection("userDetail").doc(user.uid).set({
+          'profileImage': downloadUrl,
+          'lastUpdated': FieldValue.serverTimestamp(),
+        },SetOptions(merge: true));
+
+        if(mounted){
+          setState(() {
+            _profileImageUrl = downloadUrl;
+            _isUploading = false;
+          });
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Profile picture updated successfully!")));
+        }
+      }catch(e){
+        if(mounted){
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error uploading image: ${e.toString()}")));
+        }
+        setState(() {
+          _isUploading = false;
+        });
+      }
+    }
+
+    Future<void> _pickedImage(ImageSource source) async{
+      final pickedFile = await _picker.pickImage(source: source);
+
+      if(pickedFile != null){
+        setState(() {
+          _image = File(pickedFile.path);
+        });
+      }
+      await _uploadImage(_image!);
+    }
+
+    void _showPickOptionDialog(BuildContext context){
+      showDialog(
+          context: context,
+          builder: (context){
+        return AlertDialog(
+          title: Text('Select Image Source'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text('Gallery'),
+                onTap: (){
+                  Navigator.of(context).pop();
+                  _pickedImage(ImageSource.gallery);
+                },
+              ),
+              ListTile(
+                title: Text('Camera'),
+                leading: Icon(Icons.camera_alt),
+                onTap: (){
+                  Navigator.of(context).pop();
+                  _pickedImage(ImageSource.camera);
+                },
+              )
+            ],
+          ),
+        );
+      });
+    }
+
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -83,27 +233,27 @@ class ProfilePage extends StatelessWidget {
                         width: 2.0, // Border width
                       ),
                     ),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: NetworkImage(userProfile.imageUrl),
+                    child: InkWell(
+                      onTap: _isUploading ? null : (){
+                        _showPickOptionDialog(context);
+                      },
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundImage: _image != null ? FileImage(_image!): _profileImageUrl != null && _profileImageUrl!.isNotEmpty ? CachedNetworkImageProvider(_profileImageUrl!) : AssetImage(AppImages.profile),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    userProfile.name,
+                    _isLoading ? "isLoading...": (name ?? "No Name"),
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.w700, color: AppColors.white),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'ID: ${userProfile.id}',
+                    _isLoading ? "isLoading..." :  (email ?? "No Email"),
                     style: TextStyle(color: AppColors.white),
-                 
-                  ),
-                  Text(
-                    userProfile.email,
-                    style: TextStyle(color: AppColors.white),
-                  
+
                   ),
                 ],
               ),
@@ -121,7 +271,7 @@ class ProfilePage extends StatelessWidget {
                 onTap: () {
                   context.pushNamed(
                     AppRoute.personalInfoPage,
-                    extra: userProfile,
+                    extra: widget.userProfile,
                     );
                   // Define what happens when this item is tapped
                   print('Navigate to personal info');
@@ -133,7 +283,7 @@ class ProfilePage extends StatelessWidget {
               UserReviewItem(
                 avatarImageUrl:
                     AppIcons.settingIcon,
-                  
+
                      // Example image URL
                 title: 'Settings',
                 onTap: () {
@@ -191,18 +341,18 @@ class ProfilePage extends StatelessWidget {
                 );
               },
             );
-                  
+
 
 
 
                   print('Navigate dialog');
                 },
               ),
-              
+
                 ],
               ),
             ),
-            
+
           ])),
     );
   }

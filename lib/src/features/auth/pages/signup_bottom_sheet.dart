@@ -1,9 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '../../../common/constants/app_images.dart';
 import '../../../common/constants/global_variables.dart';
 import '../../../common/utils/validations.dart';
@@ -15,6 +15,7 @@ class SignUpBottomSheet {
   static ValueNotifier<bool> isVisible = ValueNotifier(false);
   static ValueNotifier<bool> isLoading = ValueNotifier(false); // Replace isColor with isLoading
   static final _formKey = GlobalKey<FormState>();
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   static void showSignupBottomSheet(BuildContext context) {
     final TextEditingController nameController = TextEditingController();
@@ -157,6 +158,9 @@ class SignUpBottomSheet {
                             isLoading: value, // Add isLoading to CustomButton
                             onTap: () async {
                               if (_formKey.currentState!.validate()) {
+                                FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+                                FirebaseAuth _auth = FirebaseAuth.instance;
+                                final user = _auth.currentUser;
                                 isLoading.value = true;
                                 try {
                                   final authController = AuthController();
@@ -166,6 +170,11 @@ class SignUpBottomSheet {
                                     password: passwordController.text.trim(),
                                   );
                                   isLoading.value = false;
+                                  await _fireStore.collection("userDetail").doc(user!.uid).set(
+                                      {
+                                        "name": nameController.text,
+                                        "email": emailController.text
+                                      });
                                   context.pushNamed(AppRoute.customNavBar);
                                 } catch (e) {
                                   isLoading.value = false;
