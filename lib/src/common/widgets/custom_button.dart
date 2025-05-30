@@ -6,6 +6,7 @@ import '../constants/global_variables.dart';
 class CustomButton extends StatelessWidget {
   final Function()? onTap;
   final String text;
+  final bool isLoading; // Add this
   final double? textSize;
   final double? letterSpacing;
   final double? borderRadius;
@@ -37,6 +38,7 @@ class CustomButton extends StatelessWidget {
     this.textSize,
     this.letterSpacing,
     this.borderRadius,
+    this.isLoading = false, // Add this
     this.gradientColors,
     this.color,
     this.padding,
@@ -48,8 +50,7 @@ class CustomButton extends StatelessWidget {
     this.isIconRight = false,
     this.borderColor,
     this.borderWidth,
-    this.isDisabled =
-        false,  bool? isLoading, // Initialize isDisabled with a default value of false
+    this.isDisabled = false, // Initialize isDisabled with a default value of false
   });
 
   @override
